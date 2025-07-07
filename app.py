@@ -43,7 +43,7 @@ st.markdown("""
     }
 
     /* Sidebar Styling */
-    .css-1d391kg {
+    section[data-testid="stSidebar"] {
         background-color: var(--google-light-gray);
     }
     
@@ -300,6 +300,10 @@ st.markdown("""
     .expanded .expand-icon {
         transform: rotate(180deg);
     }
+
+    section[data-testid="stSidebar"] {
+        background-color: var(--google-light-gray);
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -476,12 +480,20 @@ def main():
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "What time are the main workouts scheduled? This will help me optimize meal timing.",\n  "context": "I am planning meals for energy and recovery.",\n  "coworker": "Fitness Planner"\n}',
+                        "tool_input": {
+                            "question": "What time are the main workouts scheduled? This will help me optimize meal timing.",
+                            "context": "I am planning meals for energy and recovery.",
+                            "coworker": "Fitness Planner"
+                        },
                         "tool_output": "Workouts are scheduled at 7am and 6pm."
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "Are there any mindfulness practices that require fasting or specific meal timing?",\n  "context": "I want to avoid meal-meditation conflicts.",\n  "coworker": "Mindfulness Guide"\n}',
+                        "tool_input": {
+                            "question": "Are there any mindfulness practices that require fasting or specific meal timing?",
+                            "context": "I want to avoid meal-meditation conflicts.",
+                            "coworker": "Mindfulness Guide"
+                        },
                         "tool_output": "Morning meditation is best before breakfast."
                     }
                 ]
@@ -501,7 +513,11 @@ def main():
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "What are the user\'s preferred workout times and available equipment?",\n  "context": "I want to tailor the workout plan.",\n  "coworker": "Schedule Coordinator"\n}',
+                        "tool_input": {
+                            "question": "What are the user's preferred workout times and available equipment?",
+                            "context": "I want to tailor the workout plan.",
+                            "coworker": "Schedule Coordinator"
+                        },
                         "tool_output": "Preferred times: 7am, 6pm. Equipment: Yoga mat."
                     }
                 ]
@@ -521,7 +537,11 @@ def main():
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "Are there any high-stress periods in the user\'s day?",\n  "context": "I want to place meditation sessions for maximum benefit.",\n  "coworker": "Schedule Coordinator"\n}',
+                        "tool_input": {
+                            "question": "Are there any high-stress periods in the user's day?",
+                            "context": "I want to place meditation sessions for maximum benefit.",
+                            "coworker": "Schedule Coordinator"
+                        },
                         "tool_output": "User reports stress in the afternoon."
                     }
                 ]
@@ -541,7 +561,11 @@ def main():
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "Any last-minute adjustments needed for your plans?",\n  "context": "I am finalizing the integrated schedule.",\n  "coworker": "All"\n}',
+                        "tool_input": {
+                            "question": "Any last-minute adjustments needed for your plans?",
+                            "context": "I am finalizing the integrated schedule.",
+                            "coworker": "All"
+                        },
                         "tool_output": "No further changes."
                     }
                 ]
@@ -608,12 +632,20 @@ def main():
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "Can you review the current schedule and suggest any adjustments or improvements regarding workout timing and mindfulness practices to enhance overall daily efficiency and energy levels?",\n  "context": "The daily mindfulness program includes meal timings, workout sessions, meditation, and mindfulness practices. I\'m working on creating a cohesive timetable that optimizes transitions between activities and considers energy levels throughout the day. I need your input on workout-related aspects.",\n  "coworker": "Fitness Planner"\n}',
+                        "tool_input": {
+                            "question": "Can you review the current schedule and suggest any adjustments or improvements regarding workout timing and mindfulness practices to enhance overall daily efficiency and energy levels?",
+                            "context": "The daily mindfulness program includes meal timings, workout sessions, meditation, and mindfulness practices. I'm working on creating a cohesive timetable that optimizes transitions between activities and considers energy levels throughout the day. I need your input on workout-related aspects.",
+                            "coworker": "Fitness Planner"
+                        },
                         "tool_output": "The Fitness Planner suggests moving the workout to 7am for better energy."
                     },
                     {
                         "title": "## Using tool: Ask question to coworker",
-                        "tool_input": '{\n  "question": "Can you review the current schedule and suggest any adjustments or improvements regarding mindfulness practices?",\n  "context": "The daily schedule includes meal timings, workout sessions, meditation, and mindfulness practices. I\'m working on creating a cohesive timetable that optimizes transitions between activities and considers energy levels throughout the day. I need your input on mindfulness-related aspects.",\n  "coworker": "Mindfulness Guide"\n}',
+                        "tool_input": {
+                            "question": "Can you review the current schedule and suggest any adjustments or improvements regarding mindfulness practices?",
+                            "context": "The daily schedule includes meal timings, workout sessions, meditation, and mindfulness practices. I'm working on creating a cohesive timetable that optimizes transitions between activities and considers energy levels throughout the day. I need your input on mindfulness-related aspects.",
+                            "coworker": "Mindfulness Guide"
+                        },
                         "tool_output": "The Mindfulness Guide recommends a short meditation after lunch."
                     }
                 ]
@@ -632,7 +664,9 @@ def main():
                     },
                     {
                         "title": "## Using tool: Review schedule",
-                        "tool_input": '{\n  "schedule": "Integrated daily schedule with workouts at 7am and 6pm."\n}',
+                        "tool_input": {
+                            "schedule": "Integrated daily schedule with workouts at 7am and 6pm."
+                        },
                         "tool_output": "Adjusted breakfast to 8am and dinner to 7pm for optimal recovery."
                     }
                 ]
@@ -652,7 +686,9 @@ def main():
                     },
                     {
                         "title": "## Using tool: Review meal plan",
-                        "tool_input": '{\n  "meal_plan": "Breakfast at 8am, dinner at 7pm."\n}',
+                        "tool_input": {
+                            "meal_plan": "Breakfast at 8am, dinner at 7pm."
+                        },
                         "tool_output": "Scheduled high-intensity workouts after breakfast for best results."
                     }
                 ]
@@ -672,7 +708,9 @@ def main():
                     },
                     {
                         "title": "## Using tool: Review schedule",
-                        "tool_input": '{\n  "schedule": "Integrated daily schedule with meals and workouts."\n}',
+                        "tool_input": {
+                            "schedule": "Integrated daily schedule with meals and workouts."
+                        },
                         "tool_output": "Added 10-minute meditation after lunch and before bed."
                     }
                 ]
@@ -741,12 +779,16 @@ def main():
                     },
                     {
                         "title": "## Using tool: Review history",
-                        "tool_input": '{\n  "history": "User completed 90% of scheduled activities."\n}',
+                        "tool_input": {
+                            "history": "User completed 90% of scheduled activities."
+                        },
                         "tool_output": "User showed strong commitment and consistency."
                     },
                     {
                         "title": "## Using tool: Suggest improvements",
-                        "tool_input": '{\n  "analysis": "Some mindfulness sessions were missed in the afternoon."\n}',
+                        "tool_input": {
+                            "analysis": "Some mindfulness sessions were missed in the afternoon."
+                        },
                         "tool_output": "Recommend scheduling mindfulness earlier in the day."
                     }
                 ]
@@ -766,7 +808,9 @@ def main():
                     },
                     {
                         "title": "## Using tool: Review report",
-                        "tool_input": '{\n  "report": "Weekly progress report with recommendations."\n}',
+                        "tool_input": {
+                            "report": "Weekly progress report with recommendations."
+                        },
                         "tool_output": "Schedule was effective, but flexibility is needed for mindfulness."
                     }
                 ]
