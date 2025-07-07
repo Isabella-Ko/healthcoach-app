@@ -98,6 +98,8 @@ def create_meal_plan_task(nutritionist, user_input):
         Collaborate with the Fitness Planner and Mindfulness Guide to ensure your meal 
         timing complements their recommendations.
         
+        When delegating or asking a coworker, always provide the task and context as plain strings, not as dictionaries or JSON.
+        
         Include breakfast, lunch, dinner, and snacks.
         Provide nutritional information and portion sizes.""",
         agent=nutritionist,
@@ -122,6 +124,8 @@ def create_workout_plan_task(fitness_planner, user_input):
         
         Collaborate with the Nutritionist and Mindfulness Guide to ensure your workout 
         schedule complements their recommendations.
+        
+        When delegating or asking a coworker, always provide the task and context as plain strings, not as dictionaries or JSON.
         
         Include warm-up, main exercises, and cool-down.
         Provide detailed instructions and modifications.""",
@@ -148,6 +152,8 @@ def create_mindfulness_plan_task(mindfulness_guide, user_input):
         Collaborate with the Nutritionist and Fitness Planner to ensure your meditation 
         schedule complements their recommendations.
         
+        When delegating or asking a coworker, always provide the task and context as plain strings, not as dictionaries or JSON.
+        
         Include meditation techniques, breathing exercises, and stress management tips.""",
         agent=mindfulness_guide,
         expected_output="""A mindfulness program including:
@@ -173,7 +179,9 @@ def create_integrated_schedule_task(coordinator, meal_plan, workout_plan, mindfu
         4. Ensure proper spacing between activities
         5. Consider energy levels throughout the day
         
-        Collaborate with all specialists to refine the schedule.""",
+        Collaborate with all specialists to refine the schedule.
+        
+        When delegating or asking a coworker, always provide the task and context as plain strings, not as dictionaries or JSON.""",
         agent=coordinator,
         expected_output="""An integrated daily schedule including:
         1. Hour-by-hour timetable
@@ -194,7 +202,9 @@ def create_progress_report_task(progress_reporter, history, integrated_schedule)
         2. Areas for improvement
         3. Success metrics
         
-        Provide motivation and suggestions for improvement.""",
+        Provide motivation and suggestions for improvement.
+        
+        When delegating or asking a coworker, always provide the task and context as plain strings, not as dictionaries or JSON.""",
         agent=progress_reporter,
         expected_output="""A detailed progress report including:
         1. Weekly achievements summary
