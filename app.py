@@ -370,7 +370,12 @@ def display_agent_message(role, content, icon, thought_process=None, chain_of_th
                         st.markdown(step['text'])
                     if 'tool_input' in step:
                         st.markdown("**Tool Input:**")
-                        st.code(step['tool_input'], language='json')
+                        tool_input = step['tool_input']
+                        if isinstance(tool_input, dict):
+                            for k, v in tool_input.items():
+                                st.markdown(f"- **{k.capitalize()}**: {v}")
+                        else:
+                            st.code(tool_input, language='json')
                     if 'tool_output' in step:
                         st.markdown("**Tool Output:**")
                         st.code(step['tool_output'], language='json')
