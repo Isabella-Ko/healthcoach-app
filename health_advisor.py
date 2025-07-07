@@ -1,8 +1,12 @@
 from crewai import Agent, Task, Crew, Process
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 
 load_dotenv()
+
+# Create a shared LLM instance for all agents
+llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
 
 # -- Agent Definitions --
 
@@ -10,7 +14,7 @@ class NutritionistAgent(Agent):
     """
     Suggests daily meal plans based on user goals and collaborates with other agents.
     """
-    def __init__(self):
+    def __init__(self, llm=llm):
         super().__init__(
             role='Nutritionist',
             goal='Create personalized meal plans that align with user health goals and complement workout schedules',
@@ -19,14 +23,15 @@ class NutritionistAgent(Agent):
             performance and recovery. You collaborate with fitness trainers to ensure 
             meal timing aligns with exercise schedules.""",
             verbose=True,
-            allow_delegation=True
+            allow_delegation=True,
+            llm=llm
         )
 
 class FitnessPlannerAgent(Agent):
     """
     Crafts workouts and collaborates with nutritionist for optimal timing.
     """
-    def __init__(self):
+    def __init__(self, llm=llm):
         super().__init__(
             role='Fitness Planner',
             goal='Design effective workouts that complement meal timing and energy levels',
@@ -34,14 +39,15 @@ class FitnessPlannerAgent(Agent):
             and bodyweight exercises. You understand the importance of proper nutrition 
             timing and work closely with nutritionists to optimize workout schedules.""",
             verbose=True,
-            allow_delegation=True
+            allow_delegation=True,
+            llm=llm
         )
 
 class MindfulnessGuideAgent(Agent):
     """
     Offers meditation and stress management, coordinating with other activities.
     """
-    def __init__(self):
+    def __init__(self, llm=llm):
         super().__init__(
             role='Mindfulness Guide',
             goal='Provide meditation and stress management techniques that complement daily activities',
@@ -49,14 +55,15 @@ class MindfulnessGuideAgent(Agent):
             and stress management can enhance workout performance and eating habits. 
             You coordinate with other specialists to find optimal times for practice.""",
             verbose=True,
-            allow_delegation=True
+            allow_delegation=True,
+            llm=llm
         )
 
 class ScheduleCoordinatorAgent(Agent):
     """
     Coordinates and integrates all activities into a cohesive daily schedule.
     """
-    def __init__(self):
+    def __init__(self, llm=llm):
         super().__init__(
             role='Schedule Coordinator',
             goal='Create a balanced daily schedule that optimizes all health activities',
@@ -64,14 +71,15 @@ class ScheduleCoordinatorAgent(Agent):
             You take inputs from nutritionists, fitness trainers, and mindfulness guides 
             to create a harmonious daily schedule that maximizes the benefits of each activity.""",
             verbose=True,
-            allow_delegation=True
+            allow_delegation=True,
+            llm=llm
         )
 
 class ProgressReporterAgent(Agent):
     """
     Generates a weekly health recap and motivational note.
     """
-    def __init__(self):
+    def __init__(self, llm=llm):
         super().__init__(
             role='Progress Reporter',
             goal='Track and report on user progress while providing motivation',
@@ -79,7 +87,8 @@ class ProgressReporterAgent(Agent):
             and providing motivational support. You analyze the effectiveness of the 
             integrated schedule and suggest improvements.""",
             verbose=True,
-            allow_delegation=True
+            allow_delegation=True,
+            llm=llm
         )
 
 # -- Task Definitions --
@@ -217,11 +226,11 @@ def create_progress_report_task(progress_reporter, history, integrated_schedule)
 def run_health_coach(user_profile):
     try:
         # Initialize agents
-        nutritionist = NutritionistAgent()
-        fitness_planner = FitnessPlannerAgent()
-        mindfulness_guide = MindfulnessGuideAgent()
-        coordinator = ScheduleCoordinatorAgent()
-        progress_reporter = ProgressReporterAgent()
+        nutritionist = NutritionistAgent(llm=llm)
+        fitness_planner = FitnessPlannerAgent(llm=llm)
+        mindfulness_guide = MindfulnessGuideAgent(llm=llm)
+        coordinator = ScheduleCoordinatorAgent(llm=llm)
+        progress_reporter = ProgressReporterAgent(llm=llm)
 
         # Create initial planning tasks
         meal_task = create_meal_plan_task(nutritionist, user_profile)
